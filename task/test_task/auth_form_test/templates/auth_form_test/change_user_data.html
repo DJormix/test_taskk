@@ -1,0 +1,129 @@
+<!-- templates/auth_form_test/change_user_data.html -->
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link type="text/css" href="{% static 'auth_form_test/css/style_change.css' %}" rel="stylesheet" />
+    <title>Изменение данных</title>
+</head>
+<body>
+
+    <div class="particles"></div>
+
+    <div class="container">
+        <div class="form-wrapper">
+            <div class="form-header">
+                <h1 class="form-title">Изменение данных</h1>
+                <p class="form-subtitle">Обновите вашу личную информацию</p>
+            </div>
+
+
+            <form class="register-form" method="POST">
+                {% csrf_token %}
+
+
+                <div class="form-group">
+                    <label for="id_email" class="form-label">Email адрес *</label>
+                    <div class="form-input-container">
+                        {{ form.email }}
+                        <span class="form-input-icon">✉️</span>
+                    </div>
+                    {% if form.email.errors %}
+                    <div class="error">{{ form.email.errors }}</div>
+                    {% endif %}
+                </div>
+
+
+                <div class="form-group">
+                    <label for="id_name" class="form-label">Имя *</label>
+                    <div class="form-input-container">
+                        {{ form.name }}
+                        <span class="form-input-icon">👤</span>
+                    </div>
+                    {% if form.name.errors %}
+                    <div class="error">{{ form.name.errors }}</div>
+                    {% endif %}
+                </div>
+
+
+                <div class="form-group">
+                    <label for="id_last_name" class="form-label">Фамилия *</label>
+                    <div class="form-input-container">
+                        {{ form.last_name }}
+                        <span class="form-input-icon">👤</span>
+                    </div>
+                    {% if form.last_name.errors %}
+                    <div class="error">{{ form.last_name.errors }}</div>
+                    {% endif %}
+                </div>
+
+
+                <div class="form-group">
+                    <label for="id_new_password" class="form-label">Новый пароль</label>
+                    <div class="form-input-container">
+                        {{ form.new_password }}
+                        <span class="form-input-icon">🔒</span>
+                    </div>
+                    <div class="form-hint">
+                        <ul>
+                            <li>Оставьте пустым, если не хотите менять пароль</li>
+                            <li>Не менее 8 символов</li>
+                        </ul>
+                    </div>
+                    {% if form.new_password.errors %}
+                    <div class="error">{{ form.new_password.errors }}</div>
+                    {% endif %}
+                </div>
+
+
+                <div class="form-group">
+                    <label for="id_new_password_confirm" class="form-label">Подтверждение нового пароля</label>
+                    <div class="form-input-container">
+                        {{ form.new_password_confirm }}
+                        <span class="form-input-icon">🔐</span>
+                    </div>
+                    {% if form.new_password_confirm.errors %}
+                    <div class="error">{{ form.new_password_confirm.errors }}</div>
+                    {% endif %}
+                </div>
+
+
+                {% if form.non_field_errors %}
+                <div class="error-messages">
+                    {% for error in form.non_field_errors %}
+                    <div class="error">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <div class="action-buttons">
+                    <div class="submit-btn-wrapper">
+                        <button type="submit" class="submit-btn">
+                            <span>Сохранить изменения</span>
+                        </button>
+                    </div>
+
+                    <div class="cancel-btn-wrapper">
+                        <a href="{% url 'dashboard' %}" class="cancel-btn">
+                            <span>Отмена</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="form-footer">
+                    <p class="back-link">
+                        <a href="{% url 'dashboard' %}">← Вернуться в личный кабинет</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

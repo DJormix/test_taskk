@@ -1,0 +1,148 @@
+{% load static %}
+<!doctype html>
+
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link type="text/css" href="{% static 'auth_form_test/css/dashboard.css' %}" rel="stylesheet" />
+    <title>Личный кабинет</title>
+</head>
+<body>
+
+    <div class="particles"></div>
+
+    <div class="container">
+        <div class="dashboard-wrapper">
+
+            <div class="dashboard-header">
+                <div class="user-avatar">
+                    <div class="avatar-icon">👤</div>
+                    <div class="avatar-status"></div>
+                </div>
+                <h1 class="dashboard-title">Личный кабинет</h1>
+                <p class="dashboard-subtitle">Добро пожаловать, <span class="username">{{ user.name }}</span>!</p>
+            </div>
+
+
+            <div class="user-info-section">
+                <h2 class="section-title">Ваша информация</h2>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-icon">📧</div>
+                        <div class="info-content">
+                            <h3 class="info-label">Email</h3>
+                            <p class="info-value">{{ user.email }}</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">👤</div>
+                        <div class="info-content">
+                            <h3 class="info-label">Имя</h3>
+                            <p class="info-value">{{ user.name }}</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">👥</div>
+                        <div class="info-content">
+                            <h3 class="info-label">Фамилия</h3>
+                            <p class="info-value">{{ user.last_name }}</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">📅</div>
+                        <div class="info-content">
+                            <h3 class="info-label">Дата регистрации</h3>
+                            <p class="info-value">{{ user.date_reg|date:"d.m.Y" }}</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">🆔</div>
+                        <div class="info-content">
+                            <h3 class="info-label">ID пользователя</h3>
+                            <p class="info-value">{{ user.id|slice:":8" }}...</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">🔒</div>
+                        <div class="info-content">
+                            <h3 class="info-label">Статус аккаунта</h3>
+                            <p class="info-value status-{% if user.isActive %}active{% else %}inactive{% endif %}">
+                                {% if user.isActive %}Активен{% else %}Неактивен{% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="quick-actions-section">
+                <h2 class="section-title">Быстрые действия</h2>
+
+                <div class="actions-grid">
+                    <div class="action-card purple-card">
+                        <div class="action-icon">✏️</div>
+                        <h3 class="action-title">Изменить данные</h3>
+                        <p class="action-description">
+                            Обновите вашу личную информацию, email или пароль
+                        </p>
+                        <a href="{% url 'update_profile' %}" class="action-btn purple-btn" id="editProfileBtn">
+                            <span>Изменить данные</span>
+                        </a>
+                    </div>
+
+
+                    <div class="action-card danger">
+                        <div class="action-icon">🗑️</div>
+                        <h3 class="action-title">Удалить аккаунт</h3>
+                        <p class="action-description">
+                             Навсегда удалите ваш аккаунт и все данные
+                         </p>
+
+                         <form action="{% url 'deactivate_account' %}" method="POST" id="deactivateForm" style="display: contents;">
+                            {% csrf_token %}
+                            <button type="submit" class="action-btn danger-btn" id="deleteAccountBtn">
+                                <span>Удалить аккаунт</span>
+                            </button>
+                        </form>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+            <div class="main-actions">
+                <div class="main-buttons-grid">
+
+                    <a href="{% url 'logout' %}" class="main-btn logout-btn" id="logoutBtn">
+                        <span class="btn-icon">🚪</span>
+                        <span class="btn-text">Выйти</span>
+                    </a>
+
+                    <a href="{% url 'index' %}" class="main-btn back-btn" id="backToHomeBtn">
+                        <span class="btn-icon">🏠</span>
+                        <span class="btn-text">На главную</span>
+                    </a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</body>
+</html>

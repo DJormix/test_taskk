@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link type="text/css" href="/static/auth_form_test/css/style_index.css" rel="stylesheet" />
+    <title>Добро пожаловать</title>
+</head>
+<body>
+
+    <div class="particles"></div>
+
+    <div class="container">
+        <div class="welcome-wrapper">
+            <div class="welcome-header">
+                <h1 class="welcome-title">Добро пожаловать</h1>
+                <p class="welcome-subtitle">Выберите действие для продолжения</p>
+            </div>
+
+            <div class="action-cards">
+
+                <div class="action-card">
+                    <div class="card-icon">👤</div>
+                    <h3 class="card-title">Регистрация</h3>
+                    <p class="card-description">
+                        Создайте новый аккаунт, чтобы получить доступ ко всем возможностям
+                    </p>
+                    <a href="{% url 'register' %}" class="card-btn primary">
+                        <span>Зарегистрироваться</span>
+                    </a>
+                </div>
+
+
+                <div class="action-card">
+                    <div class="card-icon">🔐</div>
+                    <h3 class="card-title">Вход</h3>
+                    <p class="card-description">
+                        Уже есть аккаунт? Войдите в систему чтобы продолжить работу
+                    </p>
+                    <a href="{% url 'login' %}" class="card-btn secondary">
+                        <span>Войти</span>
+                    </a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</body>
+</html>
